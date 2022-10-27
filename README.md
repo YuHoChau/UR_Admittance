@@ -10,4 +10,4 @@ Ubuntu 20.04 + ROS Noetic
 # Parameters
 Admittance control parameters: `/control_algorithm/Admittance/config/AdmittanceParams.yaml`
 
-Fake external wrench: `/control_algorithm/Admittance/src/WreQqchSignalGenerate.cpp`
+Fake external wrench: `/control_algorithm/Admittance/src/WrenchSignalGenerate.cpp`
