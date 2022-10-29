@@ -52,4 +52,26 @@
     <origin rpy="0 0 0.7954" xyz="0 0 0"/>
   </joint>
 
+
+  <link name="end_effector">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/waist.STL" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/waist.STL" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>  
+  </link>
+  <joint name="end_to_ee" type="fixed">
+    <parent link="ee_link"/>
+    <child link="end_effector"/>
+    <origin xyz="0.017 0 0" rpy="${pi/2.0} 0 ${pi/2.0}"/>
+  </joint>
+
+
 </robot>
