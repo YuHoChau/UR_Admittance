@@ -9,7 +9,7 @@
 #include <geometry_msgs/WrenchStamped.h>
 
 #define WRENCH_TOPIC    "/wrench"
-#define TOPIC_HZ        100.0
+#define TOPIC_HZ        125.0
  
 int main(int argc, char ** argv)
 {
@@ -24,53 +24,17 @@ int main(int argc, char ** argv)
     double t = 0;
     while (ros::ok())
     {
-        // wrench_msg.force.x = sin(t);
-        // wrench_msg.force.y = sin(t);
+        // wrench_msg.wrench.force.x = sin(t);
+        // wrench_msg.wrench.force.y = sin(t);
         // wrench_msg.wrench.force.z = 5*cos(t)+5;
-        if(static_cast<int>(t)%10 < 3)
+        if(static_cast<int>(t)%10 < 5)
         {
-            wrench_msg.wrench.force.z = -10;
+            wrench_msg.wrench.force.z = -5;
         }
         else
         {
-            wrench_msg.wrench.force.z = 0;
+            wrench_msg.wrench.force.z = 5;
         }
-        // wrench_msg.wrench.force.z = -10.4;
-        // t += 1/TOPIC_HZ;
-        // wrench_pub.publish(wrench_msg);
-        // loop_rate.sleep();
-
-        // wrench_msg.wrench.force.z = -10.2;
-        // t += 1/TOPIC_HZ;
-        // wrench_pub.publish(wrench_msg);
-        // loop_rate.sleep();
-
-        // wrench_msg.wrench.force.z = -10.1;
-        // t += 1/TOPIC_HZ;
-        // wrench_pub.publish(wrench_msg);
-        // loop_rate.sleep();
-
-        // wrench_msg.wrench.force.z = -10;
-        // t += 1/TOPIC_HZ;
-        // wrench_pub.publish(wrench_msg);
-        // loop_rate.sleep();
-
-        // wrench_msg.wrench.force.z = -9.9;
-        // t += 1/TOPIC_HZ;
-        // wrench_pub.publish(wrench_msg);
-        // loop_rate.sleep();
-
-        // wrench_msg.wrench.force.z = -9.8;
-        // t += 1/TOPIC_HZ;
-        // wrench_pub.publish(wrench_msg);
-        // loop_rate.sleep();
-
-        // wrench_msg.wrench.force.z = -9.7;
-        // t += 1/TOPIC_HZ;
-        // wrench_pub.publish(wrench_msg);
-        // loop_rate.sleep();
-
-        // wrench_msg.wrench.force.z = -9.6;
         t += 1/TOPIC_HZ;
         wrench_pub.publish(wrench_msg);
         loop_rate.sleep();
