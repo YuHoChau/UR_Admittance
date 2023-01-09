@@ -87,6 +87,10 @@ protected:
   double arm_max_vel_;
   double arm_max_acc_;
 
+  double force_x_pre, force_y_pre, force_z_pre;
+
+  double var_D_z;
+  double last_acceleration_z_;
 public:
   Admittance(ros::NodeHandle &n, double frequency,
                       std::string topic_arm_state,
