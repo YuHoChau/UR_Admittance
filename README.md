@@ -14,7 +14,7 @@ catkin build
 ```bash
 source ~/{$workspace_name}/devel/setup.bash
 ```
-3. Bring UR5e in Gazebo: 
+3. Bring UR10e in Gazebo: 
 ```bash
 roslaunch ur_e_gazebo ur10e.launch controller:=cartesian_velocity_controller_sim
 ```
@@ -29,6 +29,7 @@ roslaunch Admittance Wrench_Fake.launch
 
 # Parameters
 Admittance control parameters: `/control_algorithm/Admittance/config/AdmittanceParams.yaml`
+
 VAC parameters: `Admittance.cpp`
 
 Fake external wrench: `/control_algorithm/Admittance/src/WrenchSignalGenerate.cpp`
