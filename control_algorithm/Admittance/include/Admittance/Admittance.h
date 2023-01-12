@@ -1,11 +1,3 @@
-/*
- * @Author: MingshanHe 
- * @Date: 2021-12-05 04:08:00 
- * @Last Modified by: MingshanHe
- * @Last Modified time: 2021-12-05 04:08:21
- * @Licence: MIT Licence
- */
-
 #ifndef ADMITTANCE_H
 #define ADMITTANCE_H
 
@@ -88,8 +80,13 @@ protected:
   double arm_max_acc_;
 
   double force_x_pre, force_y_pre, force_z_pre;
+  double D_z0, A_z0, B_z0;
 
+  double var_D_x;
+  double var_D_y;
   double var_D_z;
+  double last_acceleration_x_;
+  double last_acceleration_y_;
   double last_acceleration_z_;
 public:
   Admittance(ros::NodeHandle &n, double frequency,

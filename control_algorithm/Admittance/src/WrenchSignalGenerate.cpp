@@ -24,17 +24,17 @@ int main(int argc, char ** argv)
     double t = 0;
     while (ros::ok())
     {
-        // wrench_msg.wrench.force.x = 5 * sin(t);
+        // wrench_msg.wrench.force.x = sin(t);
         // wrench_msg.wrench.force.y = sin(t);
-        wrench_msg.wrench.force.z = 10*cos(t);
-        // if(static_cast<int>(t)%10 < 5)
-        // {
-        //     wrench_msg.wrench.force.z = -5;
-        // }
-        // else
-        // {
-        //     wrench_msg.wrench.force.z = 5;
-        // }
+        // wrench_msg.wrench.force.z = 5*cos(t)+5;
+        if(static_cast<int>(t)%10 < 5)
+        {
+            wrench_msg.wrench.force.z = -15;
+        }
+        else
+        {
+            wrench_msg.wrench.force.z = 15;
+        }
         t += 1/TOPIC_HZ;
         wrench_pub.publish(wrench_msg);
         loop_rate.sleep();

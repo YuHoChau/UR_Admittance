@@ -9,14 +9,56 @@
   <xacro:include filename="$(find ur_e_description)/urdf/ur10e.urdf.xacro" />
 
   <!-- arm -->
-  <xacro:ur10e_robot prefix="" joint_limited="false"/>
+  <xacro:ur10e_robot prefix="" joint_limited="false"
+/>
 
   <link name="world" />
 
   <joint name="world_joint" type="fixed">
     <parent link="world" />
-    <child link = "base_link" />
-    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+    <child link="base_link" />
+    <origin xyz="0.0 0.0 0.71" rpy="0.0 0 0" />
+  </joint>
+  <link name="arm_0_jizuo">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/dizuo.STL"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/dizuo.STL"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="arm_0_jizuo_to_world" type="fixed">
+    <parent link="base_link"/>
+    <child link="arm_0_jizuo"/>
+    <origin rpy="0 0 0.7954" xyz="0 0 0"/>
+  </joint>
+
+
+  <link name="end_effector">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/waist.STL" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur_e_description/meshes/waist.STL" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>  
+  </link>
+  <joint name="end_to_ee" type="fixed">
+    <parent link="ee_link"/>
+    <child link="end_effector"/>
+    <origin xyz="0.017 0 0" rpy="${pi/2.0} ${pi/2.0} ${pi/2.0}"/>
   </joint>
 
 </robot>

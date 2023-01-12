@@ -113,11 +113,22 @@ void Admittance::compute_admittance() {
   // Translation error w.r.t. desired equilibrium
   Vector6d coupling_wrench_arm;
 
-  var_D_z = fabs(50 - 8 * fabs(last_acceleration_z_));
-  D_(2,2) = var_D_z;
+  // Variable Admittance Control
+  // Change the paramter in VAC rule
+  // D(t) = abs(D0 - A0*(x_dot_dot)) (if acc)
+  // D(t) = abs(D0 + B0*(x_dot_dot)) (if deacc)
+  D_z0 = 320; // Z direction
+  A_z0 = 165;
+  B_z0 = 165;
+
+  if(last_acceleration_z_ > 0){var_D_z = fabs(D_z0 - A_z0 * fabs(last_acceleration_z_));} // comment this if NOT VAC
+  else{var_D_z = fabs(D_z0 + B_z0 * fabs(last_acceleration_z_));} // comment this if NOT VAC
+  D_(2,2) = var_D_z; // comment this if NOT VAC
+  std::cout << var_D_z << std::endl; // comment this if NOT VAC
+  
   coupling_wrench_arm=  D_ * (arm_desired_twist_adm_) + K_*error;
   arm_desired_accelaration = M_.inverse() * ( - coupling_wrench_arm  + wrench_external_);
-  std::cout << D_;
+
   double a_acc_norm = (arm_desired_accelaration.segment(0, 3)).norm();
 
   if (a_acc_norm > arm_max_acc_) {
@@ -165,8 +176,8 @@ void Admittance::state_wrench_callback(
                         msg->wrench.torque.x;
 
     // set dead zone & low-pass filter
-    float force_thres_lower_limit_ = 3;
-    float force_thres_upper_limit_ = 100;
+    float force_thres_lower_limit_ = 5;
+    float force_thres_upper_limit_ = 200;
     float T_X_ = 0;
     float T_Y_ = 0;
     float T_Z_ = 10; // maybe wrong
@@ -243,4 +254,3 @@ bool Admittance::get_rotation_matrix(Matrix6d & rotation_matrix,
   }
   return true;
 }
-
